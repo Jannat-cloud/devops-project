@@ -1,4 +1,4 @@
-# Nextwork Web Project
+# AWS Project: Build a CI/CD Pipeline with CodePipeline
 
 ## Overview
 
