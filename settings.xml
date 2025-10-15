@@ -1,7 +1,6 @@
-<settings>
 <servers>
   <server>
-    <id>nextwork-devops-cicd-code-artifact-domain-NextWork-DevOps-CICD-CodeArtifact</id>
+    <id>candyoncloud-devops-cicd-project</id>
     <username>aws</username>
     <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
   </server>
@@ -9,14 +8,14 @@
 
 <profiles>
   <profile>
-    <id>nextwork-devops-cicd-code-artifact-domain-NextWork-DevOps-CICD-CodeArtifact</id>
+    <id>candyoncloud-devops-cicd-project</id>
     <activation>
       <activeByDefault>true</activeByDefault>
     </activation>
     <repositories>
       <repository>
-        <id>nextwork-devops-cicd-code-artifact-domain-NextWork-DevOps-CICD-CodeArtifact</id>
-        <url>https://nextwork-devops-cicd-code-artifact-domain-AWS-ACC-ID.d.codeartifact.us-east-2.amazonaws.com/maven/NextWork-DevOps-CICD-CodeArtifact/</url>
+        <id>candyoncloud-devops-cicd-project</id>
+        <url>https://candyoncloud-015455783287.d.codeartifact.ap-south-1.amazonaws.com/maven/devops-cicd-project/</url>
       </repository>
     </repositories>
   </profile>
@@ -24,10 +23,9 @@
 
 <mirrors>
   <mirror>
-    <id>nextwork-devops-cicd-code-artifact-domain-NextWork-DevOps-CICD-CodeArtifact</id>
-    <name>nextwork-devops-cicd-code-artifact-domain-NextWork-DevOps-CICD-CodeArtifact</name>
-    <url>https://nextwork-devops-cicd-code-artifact-domain-AWS-ACC-ID.d.codeartifact.us-east-2.amazonaws.com/maven/NextWork-DevOps-CICD-CodeArtifact/</url>
+    <id>candyoncloud-devops-cicd-project</id>
+    <name>candyoncloud-devops-cicd-project</name>
+    <url>https://candyoncloud-015455783287.d.codeartifact.ap-south-1.amazonaws.com/maven/devops-cicd-project/</url>
     <mirrorOf>*</mirrorOf>
   </mirror>
 </mirrors>
-</settings>
