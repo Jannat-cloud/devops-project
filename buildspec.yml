@@ -2,24 +2,29 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      java: corretto8   # Use Java 8
     commands:
-      - echo "Getting CodeArtifact auth token"
-      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain candyoncloud --domain-owner 015455783287 --region ap-south-1 --query authorizationToken --output text`
+      - echo "Installing dependencies and getting CodeArtifact auth token"
+      - |
+        export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
+          --domain candyoncloud \
+          --domain-owner 015455783287 \
+          --region ap-south-1 \
+          --query authorizationToken \
+          --output text)
+      - echo "Auth token retrieved"
   pre_build:
     commands:
-      - echo "Pre-build started on `date`"
+      - echo "Pre-build started on $(date)"
       - mvn validate -s settings.xml
   build:
     commands:
-      - echo "Build started on `date`"
-      - mvn clean install -s settings.xml
+      - echo "Build started on $(date)"
+      - mvn clean package -s settings.xml
   post_build:
     commands:
-      - echo "Build completed on `date`"
-      - mvn package -s settings.xml
+      - echo "Build completed successfully on $(date)"
 
 artifacts:
   files:
     - target/*.jar
+  discard-paths: yes  # optional: removes folder structure in artifact zip
