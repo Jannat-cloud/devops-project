@@ -23,8 +23,10 @@ phases:
   post_build:
     commands:
       - echo "Build completed successfully on $(date)"
+      - echo "Contents of target directory:"
+      - ls -l target/
 
 artifacts:
   files:
-    - target/*.jar
-  discard-paths: yes  # optional: removes folder structure in artifact zip
+    - target/**/*.jar   # captures any JAR inside target, including subfolders
+  discard-paths: yes     # optional: flatten the artifact structure
