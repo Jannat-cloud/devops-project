@@ -3,22 +3,27 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto8
+      java: corretto8   # Use Java 8 (you can change to corretto11 if needed)
+    commands:
+      - echo "Installing AWS CLI v2"
+      - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - unzip awscliv2.zip
+      - sudo ./aws/install
+      - echo "Getting CodeArtifact auth token"
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain candyoncloud --domain-owner 015455783287 --region ap-south-1 --query authorizationToken --output text`
   pre_build:
     commands:
-      - echo Logging in to AWS CodeArtifact...
-      - CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain candyoncloud --domain-owner 015455783287 --region ap-south-1 --query authorizationToken --output text`
-      - export CODEARTIFACT_AUTH_TOKEN
+      - echo "Pre-build started on `date`"
+      - mvn validate -s settings.xml
   build:
     commands:
-      - echo Build started on `date`
+      - echo "Build started on `date`"
       - mvn clean install -s settings.xml
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Packaging artifacts...
+      - echo "Build completed on `date`"
       - mvn package -s settings.xml
+
 artifacts:
   files:
-    - target/*.war
-  discard-paths: no
+    - target/*.jar
