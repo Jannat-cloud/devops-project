@@ -1,37 +1,14 @@
 version: 0.2
-
 phases:
   install:
     commands:
-      - echo "Installing dependencies on Ubuntu..."
       - apt-get update -y
       - apt-get install -y openjdk-17-jdk maven
-      - java -version
-      - mvn -version
-
-  pre_build:
-    commands:
-      - echo "Pre-build phase started..."
-      - echo "Current directory: $(pwd)"
-      - ls -la
-
   build:
     commands:
-      - echo "Build started on $(date)"
-      - mvn clean compile
-      - mvn package -DskipTests
-
-  post_build:
-    commands:
-      - echo "Build completed on $(date)"
-      - echo "Listing build artifacts:"
-      - find target/ -name "*.jar" -o -name "*.war"
-      - ls -la target/
-
+      - mvn clean package -DskipTests
 artifacts:
   files:
     - target/*.jar
-    - target/*.war
     - appspec.yml
     - scripts/**/*
-  discard-paths: no
