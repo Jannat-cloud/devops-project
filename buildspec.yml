@@ -25,13 +25,13 @@ phases:
     commands:
       - echo "Build completed on $(date)"
       - echo "Listing build artifacts:"
-      - find target/ -name "*.jar" -o -name "*.war" | head -10
+      - find target/ -name "*.jar" -o -name "*.war"
       - ls -la target/
 
 artifacts:
   files:
-    - 'target/*.jar'
-    - 'target/*.war'
-    - 'appspec.yml'
-    - 'scripts/**/*'
+    - target/*.jar
+    - target/*.war
+    - appspec.yml
+    - scripts/**/*
   discard-paths: no
